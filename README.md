@@ -54,6 +54,29 @@ This project was built using:
 | Jupyter Notebook | Environment for development & testing |
 
 ---
+## 5 Load & Verification
+
+### Format Used
+For this phase, both **SQLite** and **Parquet** formats were used to load the transformed datasets.
+
+- **SQLite files** were stored in:  
+  `loaded/full_data.db` and `loaded/incremental_data.db`
+- **Parquet files** were stored in:  
+  `loaded/full_data.parquet` and `loaded/incremental_data.parquet`
+
+### Verification
+Below is a sample code snippet that verifies data loading for both formats:
+
+```python
+import sqlite3, pandas as pd
+
+# SQLite Verification
+conn = sqlite3.connect('loaded/full_data.db')
+pd.read_sql('SELECT * FROM full_data LIMIT 5', conn)
+
+# Parquet Verification
+pd.read_parquet('loaded/full_data.parquet').head()
+
 
 author ~ bradley ochola 346
 ```bash
